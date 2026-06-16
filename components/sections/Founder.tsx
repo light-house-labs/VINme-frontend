@@ -108,7 +108,7 @@ export default function Founder() {
     <section 
       ref={sectionRef}
       id="about" 
-      className="section-editorial border-t border-soot overflow-hidden !pb-0"
+      className="section-editorial border-t border-soot overflow-hidden !pb-0 !mb-0"
     >
       {/* 1. Founder Biography Section */}
       <div className="container-editorial grid-12 mb-[80px] lg:mb-[120px]">
@@ -207,7 +207,7 @@ export default function Founder() {
       <div className="w-full border-t border-soot/40" />
 
       {/* 3. Customer Handover Carousel Section */}
-      <div className="py-[80px] lg:py-[120px] bg-void-black">
+      <div className="pt-[80px] pb-[40px] lg:pt-[120px] lg:pb-[60px] bg-void-black">
         <div className="container-editorial">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-[48px] gap-6 text-left">
             <div className="max-w-[700px]">

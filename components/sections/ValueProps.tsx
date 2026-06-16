@@ -39,7 +39,7 @@ export default function ValueProps() {
   return (
     <section 
       ref={sectionRef}
-      className="section-editorial"
+      className="section-editorial !pt-[40px] lg:!pt-[60px]"
     >
       <div className="container-editorial grid-12">
         {props.map((prop, i) => (

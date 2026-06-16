@@ -292,6 +292,7 @@ export default function ValuationWidget() {
   useEffect(() => {
     setMounted(true);
   }, []);
+
   const [error, setError] = useState<string | null>(null);
 
   // Form Inputs
@@ -314,6 +315,13 @@ export default function ValuationWidget() {
   const [previousRounds, setPreviousRounds] = useState<ValuationRound[]>([]);
   const [currentValuation, setCurrentValuation] = useState<ValuationResponse | null>(null);
   const [freeTextAnswer, setFreeTextAnswer] = useState("");
+  const [imgError, setImgError] = useState(false);
+  const [imgLoading, setImgLoading] = useState(true);
+
+  useEffect(() => {
+    setImgError(false);
+    setImgLoading(true);
+  }, [decodedVehicle]);
 
   // Lead Submission Inputs
   const [leadName, setLeadName] = useState("");
@@ -564,17 +572,24 @@ export default function ValuationWidget() {
     if (!currentValuation) return null;
 
     const category = currentValuation.questionCategory;
+    const itemArrow = (
+      <span className="opacity-0 translate-x-[-8px] group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 text-signal-amber text-[16px] font-[700] shrink-0 ml-4">
+        ➔
+      </span>
+    );
+
     if (category === "mileage") {
       const chips = ["< 30,000 mi", "30–70k mi", "70–120k mi", "120–200k mi", "> 200k mi"];
       return (
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mt-6">
+        <div className="flex flex-col gap-2.5 mt-6 w-full">
           {chips.map((chip) => (
             <button
               key={chip}
               onClick={() => handleAnswerSubmit(chip)}
-              className="px-4 py-3.5 bg-void-black border border-soot/60 text-[13px] font-mono tracking-wider text-bone-white hover:bg-signal-amber hover:text-void-black hover:border-signal-amber transition-all duration-300 uppercase cursor-pointer text-center rounded-none hover:shadow-sm"
+              className="w-full text-left px-5 py-[14px] bg-carbon/15 border border-soot/30 text-[14px] font-sans tracking-wide text-bone-white hover:bg-carbon/40 hover:border-signal-amber transition-all duration-300 uppercase cursor-pointer rounded-none flex items-center justify-between group shadow-sm hover:shadow-md"
             >
-              {chip}
+              <span className="font-[600]">{chip}</span>
+              {itemArrow}
             </button>
           ))}
         </div>
@@ -584,14 +599,15 @@ export default function ValuationWidget() {
     if (category === "condition") {
       const chips = ["Excellent", "Good", "Fair", "Needs work"];
       return (
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
+        <div className="flex flex-col gap-2.5 mt-6 w-full">
           {chips.map((chip) => (
             <button
               key={chip}
               onClick={() => handleAnswerSubmit(chip)}
-              className="px-4 py-3.5 bg-void-black border border-soot/60 text-[13px] font-mono tracking-wider text-bone-white hover:bg-signal-amber hover:text-void-black hover:border-signal-amber transition-all duration-300 uppercase cursor-pointer text-center rounded-none hover:shadow-sm"
+              className="w-full text-left px-5 py-[14px] bg-carbon/15 border border-soot/30 text-[14px] font-sans tracking-wide text-bone-white hover:bg-carbon/40 hover:border-signal-amber transition-all duration-300 uppercase cursor-pointer rounded-none flex items-center justify-between group shadow-sm hover:shadow-md"
             >
-              {chip}
+              <span className="font-[600]">{chip}</span>
+              {itemArrow}
             </button>
           ))}
         </div>
@@ -601,14 +617,15 @@ export default function ValuationWidget() {
     if (category === "accidents") {
       const chips = ["No accidents", "Minor damage", "Major accident"];
       return (
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
+        <div className="flex flex-col gap-2.5 mt-6 w-full">
           {chips.map((chip) => (
             <button
               key={chip}
               onClick={() => handleAnswerSubmit(chip)}
-              className="px-4 py-3.5 bg-void-black border border-soot/60 text-[13px] font-mono tracking-wider text-bone-white hover:bg-signal-amber hover:text-void-black hover:border-signal-amber transition-all duration-300 uppercase cursor-pointer text-center rounded-none hover:shadow-sm"
+              className="w-full text-left px-5 py-[14px] bg-carbon/15 border border-soot/30 text-[14px] font-sans tracking-wide text-bone-white hover:bg-carbon/40 hover:border-signal-amber transition-all duration-300 uppercase cursor-pointer rounded-none flex items-center justify-between group shadow-sm hover:shadow-md"
             >
-              {chip}
+              <span className="font-[600]">{chip}</span>
+              {itemArrow}
             </button>
           ))}
         </div>
@@ -1083,57 +1100,106 @@ export default function ValuationWidget() {
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0 }}
-                    className="flex flex-col gap-8"
+                    className="flex flex-col gap-6 w-full"
                   >
-                    {/* Visual Range Indicator Board */}
-                    <div className="border-b border-soot pb-8 flex flex-col gap-5">
-                      <div className="flex justify-between items-end font-mono">
-                        <div>
-                          <div className="text-[11px] font-[600] text-ash tracking-[0.15em] uppercase">Dynamic Appraisal Matrix Range</div>
-                          <div className="text-[40px] font-[700] text-bone-white tracking-tight leading-none mt-2">
-                            ${currentValuation.priceRange.low.toLocaleString()} – ${currentValuation.priceRange.high.toLocaleString()}
-                          </div>
-                        </div>
-                        <div className="text-right pr-8 md:pr-12">
-                          <div className="text-[11px] font-[600] text-ash tracking-[0.15em] uppercase">Appraisal Accuracy Index</div>
-                          <div className="text-[28px] font-[700] text-bone-white leading-none mt-2">
-                            {currentValuation.confidence}%
-                          </div>
-                        </div>
+                    {/* 1. Progress Bar (Top) */}
+                    <div className="w-full flex flex-col gap-2 font-mono text-left">
+                      <div className="flex justify-between text-[10px] text-ash tracking-wider uppercase font-[600]">
+                        <span>Appraisal Matrix Progress</span>
+                        <span>Stage {previousRounds.length + 1} of 4</span>
                       </div>
-
-                      {/* Clean Confidence Bar */}
-                      <div className="w-full h-[3px] bg-carbon overflow-hidden">
-                        <div 
-                          className={`h-full transition-all duration-700 ease-out ${getConfidenceStyle(currentValuation.confidence).class}`}
-                          style={{ width: `${currentValuation.confidence}%` }}
+                      <div className="w-full h-[4px] bg-carbon overflow-hidden">
+                        <motion.div 
+                          className="h-full bg-signal-amber"
+                          initial={{ width: 0 }}
+                          animate={{ width: `${Math.min(100, ((previousRounds.length + 1) / 4) * 100)}%` }}
+                          transition={{ duration: 0.5, ease: "easeOut" }}
                         />
                       </div>
                     </div>
 
-                    {/* Question Card */}
-                    <div className="p-6 md:p-8 bg-carbon/40 border border-soot/30">
-                      <div className="text-[11px] font-mono font-[600] text-signal-amber tracking-[0.2em] uppercase mb-3">
-                        DECISION BLOCK PARAMETER ({previousRounds.length + 1})
+                    {/* 2. Split Columns Grid */}
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch mt-2">
+                      {/* Left Column: Price, Confidence, Image, and Model */}
+                      <div className="col-span-12 lg:col-span-6 flex flex-col gap-5 text-left">
+                        <div className="flex flex-col gap-1">
+                          <div className="text-[10px] font-mono font-[600] text-ash tracking-[0.15em] uppercase">Dynamic Appraisal Matrix Range</div>
+                          <div className="text-[32px] md:text-[36px] font-[800] text-bone-white tracking-tight leading-none mt-2 font-sans">
+                            ${currentValuation.priceRange.low.toLocaleString()} – ${currentValuation.priceRange.high.toLocaleString()}
+                          </div>
+                        </div>
+
+                        <div className="flex flex-col gap-2">
+                          <div className="flex justify-between items-end text-[11px] font-sans tracking-wide">
+                            <span className="text-ash tracking-[0.1em] uppercase">Appraisal Accuracy Index</span>
+                            <span className="font-[700] text-bone-white">{currentValuation.confidence}%</span>
+                          </div>
+                          {/* Clean Confidence Bar */}
+                          <div className="w-full h-[3px] bg-carbon overflow-hidden">
+                            <div 
+                              className={`h-full transition-all duration-700 ease-out ${getConfidenceStyle(currentValuation.confidence).class}`}
+                              style={{ width: `${currentValuation.confidence}%` }}
+                            />
+                          </div>
+                        </div>
+
+                        {/* White Background Car Image Container with Skeleton */}
+                        <div className="relative w-full h-[260px] md:h-[300px] bg-white border border-soot/10 flex items-center justify-center overflow-hidden p-6">
+                          {imgLoading && (
+                            <div className="absolute inset-0 flex flex-col items-center justify-center bg-ash/10 animate-pulse">
+                              <div className="w-2/3 h-[70px] bg-ash/20 rounded-none" />
+                              <span className="text-[10px] font-mono text-ash mt-3 uppercase tracking-widest">Loading model profile...</span>
+                            </div>
+                          )}
+                          <img
+                            key={`${decodedVehicle.make}-${decodedVehicle.model}`}
+                            src={imgError 
+                              ? `https://images.unsplash.com/featured/800x450/?white,car,${encodeURIComponent(decodedVehicle.make.toLowerCase())},${encodeURIComponent(decodedVehicle.model.toLowerCase())}`
+                              : `https://cdn.imagin.studio/getimage?customer=carwow&make=${encodeURIComponent(decodedVehicle.make.toLowerCase())}&modelFamily=${encodeURIComponent(decodedVehicle.model.toLowerCase().split(' ')[0])}&zoomType=fullscreen&paintId=pspc0006&modelYear=${decodedVehicle.year}`
+                            }
+                            alt={`${decodedVehicle.year} ${decodedVehicle.make} ${decodedVehicle.model}`}
+                            onLoad={() => setImgLoading(false)}
+                            onError={() => {
+                              setImgError(true);
+                              setImgLoading(false);
+                            }}
+                            className={`w-full max-w-[480px] h-auto object-contain max-h-[260px] mx-auto transition-all duration-500 hover:scale-[1.03] ${imgLoading ? 'opacity-0' : 'opacity-100'}`}
+                          />
+                        </div>
+
+                        <div className="text-left font-mono text-[12px] border-t border-soot/40 pt-4 mt-2">
+                          <div className="text-bone-white font-[700] uppercase text-[14px]">
+                            {decodedVehicle.year} {decodedVehicle.make} {decodedVehicle.model} {decodedVehicle.trim ? ` ${decodedVehicle.trim}` : ''}
+                          </div>
+                        </div>
                       </div>
-                      <h4 className="text-[24px] md:text-[28px] font-[600] text-bone-white leading-snug tracking-tight mb-1">
-                        {currentValuation.nextQuestion}
-                      </h4>
 
-                      {/* Spacious Chips Grid */}
-                      {renderCategoryOptions()}
-                    </div>
+                      {/* Right Column: Question & Option Chips */}
+                      <div className="col-span-12 lg:col-span-6 flex flex-col justify-between text-left lg:pl-10 lg:border-l lg:border-soot/20">
+                        <div>
+                          <div className="text-[11px] font-mono font-[600] text-signal-amber tracking-[0.2em] uppercase mb-3">
+                            DECISION BLOCK PARAMETER ({previousRounds.length + 1})
+                          </div>
+                          <h4 className="text-[20px] md:text-[22px] font-[600] text-bone-white leading-snug tracking-tight mb-1">
+                            {currentValuation.nextQuestion}
+                          </h4>
 
-                    <div className="flex justify-between items-center border-t border-soot pt-6 mt-4 font-mono text-[12px]">
-                      <span className="text-ash">
-                        EVALUATED SPEC: <span className="text-bone-white uppercase font-[600]">{decodedVehicle.year} {decodedVehicle.make} {decodedVehicle.model}</span>
-                      </span>
-                      <button
-                        onClick={handleClose}
-                        className="text-ash hover:text-bone-white transition-colors uppercase tracking-[0.1em] flex items-center gap-2 cursor-pointer font-[600]"
-                      >
-                        <RefreshCw className="w-3.5 h-3.5" /> Restart Analysis
-                      </button>
+                          {/* Spacious Chips Grid */}
+                          {renderCategoryOptions()}
+                        </div>
+
+                        <div className="flex justify-between items-center border-t border-soot pt-6 mt-8 font-mono text-[12px]">
+                          <span className="text-ash uppercase">
+                            Step {previousRounds.length + 1} of 4
+                          </span>
+                          <button
+                            onClick={handleClose}
+                            className="text-ash hover:text-bone-white transition-colors uppercase tracking-[0.1em] flex items-center gap-2 cursor-pointer font-[600]"
+                          >
+                            <RefreshCw className="w-3.5 h-3.5" /> Restart Analysis
+                          </button>
+                        </div>
+                      </div>
                     </div>
                   </motion.div>
                 )}
@@ -1151,11 +1217,11 @@ export default function ValuationWidget() {
                       {currentValuation.confidence >= 65 ? (
                         <>
                           <div className="text-[11px] font-mono font-[600] text-ash tracking-[0.25em] uppercase">FINAL APPRAISAL RESULT</div>
-                          <div className="text-[56px] font-[800] text-[#e8a020] tracking-tight leading-none my-3 font-mono">
+                          <div className="text-[56px] font-[800] text-[#e8a020] tracking-tight leading-none my-3 font-sans">
                             ${currentValuation.priceRange.low.toLocaleString()} – ${currentValuation.priceRange.high.toLocaleString()}
                           </div>
                           
-                          <div className="flex justify-center items-center gap-2 font-mono text-[12px]">
+                          <div className="flex justify-center items-center gap-2 text-[12px] font-sans tracking-wide">
                             <span className="text-ash tracking-[0.1em] uppercase">System Appraisal Confidence:</span>
                             <span className="font-[700] text-bone-white">{currentValuation.confidence}%</span>
                           </div>
@@ -1165,6 +1231,20 @@ export default function ValuationWidget() {
                             <div 
                               className={`h-full transition-all duration-700 ease-out ${getConfidenceStyle(currentValuation.confidence).class}`}
                               style={{ width: `${currentValuation.confidence}%` }}
+                            />
+                          </div>
+
+                          {/* White Background Car Image Card */}
+                          <div className="w-full py-8 flex items-center justify-center bg-white border border-soot/10 overflow-hidden p-6">
+                            <img
+                              key={`${decodedVehicle.make}-${decodedVehicle.model}`}
+                              src={imgError 
+                                ? `https://images.unsplash.com/featured/800x450/?white,car,${encodeURIComponent(decodedVehicle.make.toLowerCase())},${encodeURIComponent(decodedVehicle.model.toLowerCase())}`
+                                : `https://cdn.imagin.studio/getimage?customer=carwow&make=${encodeURIComponent(decodedVehicle.make.toLowerCase())}&modelFamily=${encodeURIComponent(decodedVehicle.model.toLowerCase().split(' ')[0])}&zoomType=fullscreen&paintId=pspc0006&modelYear=${decodedVehicle.year}`
+                              }
+                              alt={`${decodedVehicle.year} ${decodedVehicle.make} ${decodedVehicle.model}`}
+                              onError={() => setImgError(true)}
+                              className="w-full max-w-[560px] h-auto object-contain max-h-[300px] mx-auto transition-all duration-500 hover:scale-[1.03]"
                             />
                           </div>
 
