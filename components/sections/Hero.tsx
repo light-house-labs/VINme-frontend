@@ -5,10 +5,8 @@ import Image from "next/image";
 import gsap from "gsap";
 import SplitType from "split-type";
 import ValuationWidget from "@/components/valuation/ValuationWidget";
-import { useParticles } from "@/hooks/useParticles";
 
 export default function Hero() {
-  const canvasRef = useParticles();
   const headlineRef = useRef<HTMLHeadingElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const bgRef = useRef<HTMLDivElement>(null);
@@ -67,9 +65,6 @@ export default function Hero() {
         <div className="absolute inset-0 bg-gradient-to-t from-void-black via-transparent to-transparent" />
       </div>
 
-      {/* Particle Canvas */}
-      <canvas ref={canvasRef} className="absolute inset-0 z-0 pointer-events-none" />
-
       <div className="container-editorial w-full relative z-10 grid-12 items-center">
         <div className="col-span-4 md:col-span-8 lg:col-span-7 flex flex-col justify-center pt-32 lg:pt-0">
           <div className="label-editorial opacity-0 animate-fade-in-up" style={{ animationDelay: '1.2s', animationFillMode: 'forwards' }}>
@@ -81,7 +76,7 @@ export default function Hero() {
           </h1>
         </div>
 
-        <div className="col-span-4 md:col-span-8 lg:col-span-4 lg:col-start-9 flex justify-end items-center mt-16 lg:mt-0">
+        <div className="col-span-4 md:col-span-8 lg:col-span-5 lg:col-start-8 flex justify-end items-center mt-16 lg:mt-0">
           <ValuationWidget />
         </div>
       </div>
