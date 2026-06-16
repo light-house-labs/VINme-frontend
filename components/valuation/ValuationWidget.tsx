@@ -201,14 +201,14 @@ function SearchableSelect({
   return (
     <div ref={dropdownRef} className="relative w-full">
       {disabled ? (
-        <div className="w-full border-b border-soot/40 text-ash/40 px-0 py-4 sm:py-3 font-[600] text-[16px] sm:text-[18px] uppercase tracking-[0.1em] sm:tracking-[0.2em] opacity-50 cursor-not-allowed select-none text-left">
+        <div className="w-full border-b border-soot/40 text-ash/40 px-0 py-4 font-[600] text-[16px] sm:text-[18px] uppercase tracking-[0.1em] sm:tracking-[0.2em] opacity-50 cursor-not-allowed select-none text-left">
           {disabledPlaceholder}
         </div>
       ) : (
         <>
           <div 
             onClick={() => setIsOpen(!isOpen)}
-            className={`w-full border-b px-0 py-4 sm:py-3 font-[600] text-[16px] sm:text-[18px] uppercase tracking-[0.1em] sm:tracking-[0.2em] cursor-pointer flex justify-between items-center transition-colors select-none ${
+            className={`w-full border-b px-0 py-4 font-[600] text-[16px] sm:text-[18px] uppercase tracking-[0.1em] sm:tracking-[0.2em] cursor-pointer flex justify-between items-center transition-colors select-none ${
               isOpen ? "border-signal-amber text-bone-white" : "border-soot text-bone-white"
             }`}
           >
