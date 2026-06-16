@@ -4,9 +4,9 @@ import { CursorDrivenParticleTypography } from "@/components/ui/CursorDrivenPart
 export default function Footer() {
   return (
     <footer className="bg-void-black border-t border-soot pt-[80px] pb-[48px] px-[24px] md:px-[64px] lg:px-[120px]">
-      <div className="container-editorial grid grid-cols-1 md:grid-cols-12 gap-[48px] lg:gap-[80px] mb-[24px] lg:mb-[32px] text-left">
+      <div className="container-editorial grid grid-cols-2 md:grid-cols-12 gap-x-[24px] gap-y-[48px] md:gap-[48px] lg:gap-[80px] mb-[24px] lg:mb-[32px] text-left">
         {/* Brand block */}
-        <div className="col-span-12 lg:col-span-4 flex flex-col justify-start">
+        <div className="col-span-2 md:col-span-12 lg:col-span-4 flex flex-col justify-start">
           <div className="flex items-baseline gap-[12px] mb-[12px]">
             <Link href="/" className="text-[28px] md:text-[32px] font-[800] text-bone-white tracking-[-0.02em]">
               VINme
@@ -31,7 +31,7 @@ export default function Footer() {
         </div>
         
         {/* Links Col 1 */}
-        <div className="col-span-6 md:col-span-4 lg:col-span-2.5 flex flex-col gap-[16px]">
+        <div className="col-span-1 md:col-span-4 lg:col-span-2.5 flex flex-col gap-[16px]">
           <span className="text-[11px] font-mono font-[700] text-bone-white tracking-[0.2em] uppercase">Solutions</span>
           <div className="flex flex-col gap-[12px]">
             <Link href="/" className="text-[13px] text-ash hover:text-bone-white transition-colors">Instant Appraisal</Link>
@@ -42,7 +42,7 @@ export default function Footer() {
         </div>
 
         {/* Links Col 2 */}
-        <div className="col-span-6 md:col-span-4 lg:col-span-2.5 flex flex-col gap-[16px]">
+        <div className="col-span-1 md:col-span-4 lg:col-span-2.5 flex flex-col gap-[16px]">
           <span className="text-[11px] font-mono font-[700] text-bone-white tracking-[0.2em] uppercase">Company</span>
           <div className="flex flex-col gap-[12px]">
             <Link href="#about" className="text-[13px] text-ash hover:text-bone-white transition-colors">About Our AI</Link>
@@ -53,7 +53,7 @@ export default function Footer() {
         </div>
 
         {/* Links Col 3 */}
-        <div className="col-span-12 md:col-span-4 lg:col-span-3 flex flex-col gap-[16px]">
+        <div className="col-span-2 md:col-span-4 lg:col-span-3 flex flex-col gap-[16px]">
           <span className="text-[11px] font-mono font-[700] text-bone-white tracking-[0.2em] uppercase">Legal</span>
           <div className="flex flex-col gap-[12px]">
             <a href="#" className="text-[13px] text-ash hover:text-bone-white transition-colors">Privacy Charter</a>
@@ -64,7 +64,7 @@ export default function Footer() {
         </div>
 
         {/* Large Particle Typography Brand Logo */}
-        <div className="col-span-12 lg:col-span-9 flex justify-center lg:justify-end items-center h-full">
+        <div className="col-span-2 lg:col-span-9 flex justify-center lg:justify-end items-center h-full">
           <div className="w-full max-w-[750px] h-[100px] md:h-[130px] lg:h-[160px] select-none pointer-events-auto">
             <CursorDrivenParticleTypography 
               text="VINme" 

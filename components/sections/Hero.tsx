@@ -71,7 +71,7 @@ export default function Hero() {
             AI-Powered Valuation
           </div>
 
-          <h1 ref={headlineRef} className="text-[56px] md:text-[72px] lg:text-[110px] font-[800] text-bone-white leading-[0.9] tracking-[-0.05em] whitespace-pre-line text-left mb-16 lg:mb-32 uppercase" style={{ perspective: '1000px' }}>
+          <h1 ref={headlineRef} className="text-[42px] sm:text-[56px] md:text-[72px] lg:text-[110px] font-[800] text-bone-white leading-[0.9] tracking-[-0.05em] whitespace-pre-line text-left mb-16 lg:mb-32 uppercase" style={{ perspective: '1000px' }}>
             SELL YOUR CAR.<br/>GET A REAL OFFER.
           </h1>
         </div>

@@ -21,7 +21,7 @@ export default function Home() {
       <DealersBand />
       <TextReveal text="Real-time market analytics meeting seamless transaction logic. We bypass dealership overhead and negotiations to deliver guaranteed offers backed by millions of data points. Simple. Fair. Instant." />
       <Features />
-      <div className="w-full py-12 flex items-center justify-center bg-void-black overflow-hidden border-y border-soot/30 text-ash/30 hover:text-signal-amber/60 transition-colors duration-500 select-none">
+      <div className="hidden md:flex w-full py-12 items-center justify-center bg-void-black overflow-hidden border-y border-soot/30 text-ash/30 hover:text-signal-amber/60 transition-colors duration-500 select-none">
         <MagnetLines 
           rows={3}
           columns={24}
@@ -34,7 +34,7 @@ export default function Home() {
         />
       </div>
       <FAQ />
-      <div className="w-full py-12 flex items-center justify-center bg-void-black overflow-hidden border-y border-soot/30 text-ash/30 hover:text-signal-amber/60 transition-colors duration-500 select-none">
+      <div className="hidden md:flex w-full py-12 items-center justify-center bg-void-black overflow-hidden border-y border-soot/30 text-ash/30 hover:text-signal-amber/60 transition-colors duration-500 select-none">
         <MagnetLines 
           rows={3}
           columns={24}

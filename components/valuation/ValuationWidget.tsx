@@ -201,14 +201,14 @@ function SearchableSelect({
   return (
     <div ref={dropdownRef} className="relative w-full">
       {disabled ? (
-        <div className="w-full border-b border-soot/40 text-ash/40 px-0 py-3 font-[600] text-[18px] uppercase tracking-[0.2em] opacity-50 cursor-not-allowed select-none text-left">
+        <div className="w-full border-b border-soot/40 text-ash/40 px-0 py-4 sm:py-3 font-[600] text-[16px] sm:text-[18px] uppercase tracking-[0.1em] sm:tracking-[0.2em] opacity-50 cursor-not-allowed select-none text-left">
           {disabledPlaceholder}
         </div>
       ) : (
         <>
           <div 
             onClick={() => setIsOpen(!isOpen)}
-            className={`w-full border-b px-0 py-3 font-[600] text-[18px] uppercase tracking-[0.2em] cursor-pointer flex justify-between items-center transition-colors select-none ${
+            className={`w-full border-b px-0 py-4 sm:py-3 font-[600] text-[16px] sm:text-[18px] uppercase tracking-[0.1em] sm:tracking-[0.2em] cursor-pointer flex justify-between items-center transition-colors select-none ${
               isOpen ? "border-signal-amber text-bone-white" : "border-soot text-bone-white"
             }`}
           >
@@ -233,7 +233,10 @@ function SearchableSelect({
                   onChange={(e) => setSearch(e.target.value)}
                   placeholder="SEARCH..."
                   autoFocus
-                  className="w-full bg-carbon border border-soot/60 text-bone-white px-3 py-2 text-[14px] font-mono tracking-wider focus:outline-none focus:border-signal-amber rounded-none uppercase"
+                  autoCorrect="off"
+                  autoCapitalize="none"
+                  spellCheck="false"
+                  className="w-full bg-carbon border border-soot/60 text-bone-white px-3 py-3 text-[16px] font-mono tracking-wider focus:outline-none focus:border-signal-amber rounded-none uppercase"
                 />
 
                 <div 
@@ -251,7 +254,7 @@ function SearchableSelect({
                           setIsOpen(false);
                           setSearch("");
                         }}
-                        className="w-full text-left px-2 py-3 hover:bg-carbon text-bone-white hover:text-signal-amber transition-colors uppercase font-[600] cursor-pointer"
+                        className="w-full text-left py-4 hover:text-signal-amber transition-colors uppercase font-[600] cursor-pointer"
                       >
                         {opt}
                       </button>
@@ -269,7 +272,7 @@ function SearchableSelect({
                       setIsOpen(false);
                       setSearch("");
                     }}
-                    className="w-full text-left px-2 py-3 hover:bg-carbon text-ash hover:text-bone-white transition-colors uppercase font-[600] cursor-pointer"
+                    className="w-full text-left py-4 text-ash hover:text-bone-white transition-colors uppercase font-[600] cursor-pointer"
                   >
                     + OTHER (TYPE MANUALLY)
                   </button>
@@ -604,7 +607,7 @@ export default function ValuationWidget() {
             <button
               key={chip}
               onClick={() => handleAnswerSubmit(chip)}
-              className="w-full text-left px-5 py-[14px] bg-carbon/15 border border-soot/30 text-[14px] font-sans tracking-wide text-bone-white hover:bg-carbon/40 hover:border-signal-amber transition-all duration-300 uppercase cursor-pointer rounded-none flex items-center justify-between group shadow-sm hover:shadow-md"
+              className="w-full text-left px-5 py-[18px] bg-carbon/15 border border-soot/30 text-[16px] font-sans tracking-wide text-bone-white hover:bg-carbon/40 hover:border-signal-amber transition-all duration-300 uppercase cursor-pointer rounded-none flex items-center justify-between group shadow-sm hover:shadow-md"
             >
               <span className="font-[600]">{chip}</span>
               {itemArrow}
@@ -622,7 +625,7 @@ export default function ValuationWidget() {
             <button
               key={chip}
               onClick={() => handleAnswerSubmit(chip)}
-              className="w-full text-left px-5 py-[14px] bg-carbon/15 border border-soot/30 text-[14px] font-sans tracking-wide text-bone-white hover:bg-carbon/40 hover:border-signal-amber transition-all duration-300 uppercase cursor-pointer rounded-none flex items-center justify-between group shadow-sm hover:shadow-md"
+              className="w-full text-left px-5 py-[18px] bg-carbon/15 border border-soot/30 text-[16px] font-sans tracking-wide text-bone-white hover:bg-carbon/40 hover:border-signal-amber transition-all duration-300 uppercase cursor-pointer rounded-none flex items-center justify-between group shadow-sm hover:shadow-md"
             >
               <span className="font-[600]">{chip}</span>
               {itemArrow}
@@ -669,10 +672,9 @@ export default function ValuationWidget() {
 
   return (
     <>
-      {/* ON-PAGE ENTRY POINT WIDGET */}
       <div 
         ref={containerRef}
-        className="relative w-full p-8 lg:p-12 flex flex-col z-10 bg-void-black border border-soot transition-all duration-500 ease-in-out text-left"
+        className="relative w-full p-6 sm:p-8 lg:p-12 flex flex-col z-10 bg-void-black border border-soot transition-all duration-500 ease-in-out text-left"
       >
         {/* Subtle brand lines in corner */}
         <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-signal-amber/40" />
@@ -698,7 +700,7 @@ export default function ValuationWidget() {
                 setIsCustomMake(false);
                 setIsCustomModel(false);
               }}
-              className={`flex-1 pb-6 text-[12px] font-mono font-[600] uppercase tracking-[0.15em] transition-colors relative rounded-none ${
+              className={`flex-1 pt-4 pb-4 sm:pt-6 sm:pb-6 text-[11px] sm:text-[12px] font-mono font-[600] uppercase tracking-[0.05em] sm:tracking-[0.15em] transition-colors relative rounded-none ${
                 activeTab === tab ? "text-bone-white font-[700]" : "text-ash hover:text-bone-white"
               }`}
             >
@@ -726,7 +728,7 @@ export default function ValuationWidget() {
                 exit={{ opacity: 0, x: 10 }}
                 className="flex flex-col gap-6"
               >
-                <div className="flex gap-6">
+                <div className="flex gap-4 sm:gap-6">
                   <div className="flex-[2] relative">
                     <label className="text-[10px] font-mono font-[600] text-ash tracking-[0.15em] uppercase block mb-1">Plate Registration</label>
                     <input
@@ -734,22 +736,29 @@ export default function ValuationWidget() {
                       value={plate}
                       onChange={(e) => setPlate(e.target.value)}
                       placeholder="ENTER PLATE"
-                      className="w-full bg-transparent border-b border-soot text-bone-white px-0 py-3 focus:outline-none font-[600] text-[18px] placeholder:text-ash/20 transition-colors uppercase tracking-[0.2em] rounded-none focus:border-transparent peer"
+                      autoCorrect="off"
+                      autoCapitalize="characters"
+                      autoComplete="off"
+                      spellCheck="false"
+                      className="w-full bg-transparent border-b border-soot text-bone-white px-0 py-4 focus:outline-none font-[600] text-[16px] sm:text-[18px] placeholder:text-ash/20 transition-colors uppercase tracking-[0.1em] sm:tracking-[0.2em] rounded-none focus:border-transparent peer"
                     />
                     <div className="absolute bottom-0 left-0 w-0 h-[1px] bg-signal-amber transition-all duration-500 peer-focus:w-full" />
                   </div>
                   <div className="flex-1 relative">
                     <label className="text-[10px] font-mono font-[600] text-ash tracking-[0.15em] uppercase block mb-1">State</label>
-                    <select 
-                      value={state}
-                      onChange={(e) => setState(e.target.value)}
-                      className="w-full bg-transparent border-b border-soot text-bone-white px-0 py-3 focus:outline-none font-[600] text-[18px] transition-colors uppercase tracking-[0.2em] appearance-none rounded-none cursor-pointer focus:border-transparent peer"
-                    >
-                      <option value="CA">CA</option>
-                      <option value="NY">NY</option>
-                      <option value="TX">TX</option>
-                      <option value="FL">FL</option>
-                    </select>
+                    <div className="relative">
+                      <select 
+                        value={state}
+                        onChange={(e) => setState(e.target.value)}
+                        className="w-full bg-transparent border-b border-soot text-bone-white px-0 py-4 focus:outline-none font-[600] text-[16px] sm:text-[18px] transition-colors uppercase tracking-[0.1em] sm:tracking-[0.2em] appearance-none rounded-none cursor-pointer focus:border-transparent peer pr-6"
+                      >
+                        <option value="CA" className="bg-void-black text-bone-white">CA</option>
+                        <option value="NY" className="bg-void-black text-bone-white">NY</option>
+                        <option value="TX" className="bg-void-black text-bone-white">TX</option>
+                        <option value="FL" className="bg-void-black text-bone-white">FL</option>
+                      </select>
+                      <span className="absolute right-0 top-1/2 -translate-y-1/2 text-[10px] text-ash pointer-events-none">▼</span>
+                    </div>
                     <div className="absolute bottom-0 left-0 w-0 h-[1px] bg-signal-amber transition-all duration-500 peer-focus:w-full" />
                   </div>
                 </div>
@@ -772,7 +781,11 @@ export default function ValuationWidget() {
                     value={vin}
                     onChange={(e) => setVin(e.target.value)}
                     placeholder="ENTER 17-DIGIT VIN"
-                    className="w-full bg-transparent border-b border-soot text-bone-white px-0 py-3 focus:outline-none font-[600] text-[18px] placeholder:text-ash/20 transition-colors uppercase tracking-[0.2em] rounded-none focus:border-transparent peer"
+                    autoCorrect="off"
+                    autoCapitalize="characters"
+                    autoComplete="off"
+                    spellCheck="false"
+                    className="w-full bg-transparent border-b border-soot text-bone-white px-0 py-4 focus:outline-none font-[600] text-[16px] sm:text-[18px] placeholder:text-ash/20 transition-colors uppercase tracking-[0.1em] sm:tracking-[0.2em] rounded-none focus:border-transparent peer"
                   />
                   <div className="absolute bottom-0 left-0 w-0 h-[1px] bg-signal-amber transition-all duration-500 peer-focus:w-full" />
                 </div>
@@ -787,19 +800,22 @@ export default function ValuationWidget() {
                 exit={{ opacity: 0, x: 10 }}
                 className="flex flex-col gap-6 mb-6"
               >
-                <div className="grid grid-cols-2 gap-6">
+                <div className="grid grid-cols-2 gap-4 sm:gap-6">
                   <div className="relative">
                     <label className="text-[10px] font-mono font-[600] text-ash tracking-[0.15em] uppercase block mb-1">Year</label>
-                    <select 
-                      value={year}
-                      onChange={(e) => setYear(e.target.value)}
-                      className="w-full bg-transparent border-b border-soot text-bone-white px-0 py-3 focus:outline-none font-[600] text-[18px] transition-colors uppercase tracking-[0.2em] appearance-none rounded-none cursor-pointer focus:border-transparent peer"
-                    >
-                      <option value="">YEAR</option>
-                      {years.map((y) => (
-                        <option key={y} value={y}>{y}</option>
-                      ))}
-                    </select>
+                    <div className="relative">
+                      <select 
+                        value={year}
+                        onChange={(e) => setYear(e.target.value)}
+                        className="w-full bg-transparent border-b border-soot text-bone-white px-0 py-4 focus:outline-none font-[600] text-[16px] sm:text-[18px] transition-colors uppercase tracking-[0.1em] sm:tracking-[0.2em] appearance-none rounded-none cursor-pointer focus:border-transparent peer pr-6"
+                      >
+                        <option value="" className="bg-void-black text-bone-white">YEAR</option>
+                        {years.map((y) => (
+                          <option key={y} value={y} className="bg-void-black text-bone-white">{y}</option>
+                        ))}
+                      </select>
+                      <span className="absolute right-0 top-1/2 -translate-y-1/2 text-[10px] text-ash pointer-events-none">▼</span>
+                    </div>
                     <div className="absolute bottom-0 left-0 w-0 h-[1px] bg-signal-amber transition-all duration-500 peer-focus:w-full" />
                   </div>
                   <div className="relative">
@@ -827,7 +843,9 @@ export default function ValuationWidget() {
                           value={make}
                           onChange={(e) => setMake(e.target.value)}
                           placeholder="ENTER MAKE"
-                          className="flex-1 bg-transparent border-b border-soot text-bone-white px-0 py-3 focus:outline-none font-[600] text-[18px] placeholder:text-ash/20 transition-colors uppercase tracking-[0.2em] rounded-none focus:border-transparent peer"
+                          autoCorrect="off"
+                          autoComplete="off"
+                          className="flex-1 bg-transparent border-b border-soot text-bone-white px-0 py-4 focus:outline-none font-[600] text-[16px] sm:text-[18px] placeholder:text-ash/20 transition-colors uppercase tracking-[0.1em] sm:tracking-[0.2em] rounded-none focus:border-transparent peer"
                         />
                         <button
                           type="button"
@@ -846,7 +864,7 @@ export default function ValuationWidget() {
                     )}
                   </div>
                 </div>
-                <div className="grid grid-cols-2 gap-6">
+                <div className="grid grid-cols-2 gap-4 sm:gap-6">
                   <div className="relative">
                     <label className="text-[10px] font-mono font-[600] text-ash tracking-[0.15em] uppercase block mb-1">Model</label>
                     {!isCustomModel ? (
@@ -871,7 +889,9 @@ export default function ValuationWidget() {
                           value={model}
                           onChange={(e) => setModel(e.target.value)}
                           placeholder="ENTER MODEL"
-                          className="flex-1 bg-transparent border-b border-soot text-bone-white px-0 py-3 focus:outline-none font-[600] text-[18px] placeholder:text-ash/20 transition-colors uppercase tracking-[0.2em] rounded-none focus:border-transparent peer"
+                          autoCorrect="off"
+                          autoComplete="off"
+                          className="flex-1 bg-transparent border-b border-soot text-bone-white px-0 py-4 focus:outline-none font-[600] text-[16px] sm:text-[18px] placeholder:text-ash/20 transition-colors uppercase tracking-[0.1em] sm:tracking-[0.2em] rounded-none focus:border-transparent peer"
                         />
                         {!isCustomMake && make && (
                           <button
@@ -896,7 +916,9 @@ export default function ValuationWidget() {
                       value={trim}
                       onChange={(e) => setTrim(e.target.value)}
                       placeholder="E.G. SE"
-                      className="w-full bg-transparent border-b border-soot text-bone-white px-0 py-3 focus:outline-none font-[600] text-[18px] placeholder:text-ash/20 transition-colors uppercase tracking-[0.2em] rounded-none focus:border-transparent peer"
+                      autoCorrect="off"
+                      autoComplete="off"
+                      className="w-full bg-transparent border-b border-soot text-bone-white px-0 py-4 focus:outline-none font-[600] text-[16px] sm:text-[18px] placeholder:text-ash/20 transition-colors uppercase tracking-[0.1em] sm:tracking-[0.2em] rounded-none focus:border-transparent peer"
                     />
                     <div className="absolute bottom-0 left-0 w-0 h-[1px] bg-signal-amber transition-all duration-500 peer-focus:w-full" />
                   </div>

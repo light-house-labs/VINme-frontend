@@ -48,7 +48,7 @@
 }
 
 @layer base {
-  html { background: var(--color-void-black); color: var(--color-bone-white); scroll-behavior: smooth; }
+  html { background: var(--color-void-black); color: var(--color-bone-white); scroll-behavior: smooth; overflow-x: hidden; }
   body { min-height: 100vh; overflow-x: hidden; }
 
   /* Cinematic grain */
