@@ -4,7 +4,6 @@ import "./globals.css";
 import Nav from "@/components/layout/Nav";
 import Footer from "@/components/layout/Footer";
 import SmoothScroll from "@/components/providers/SmoothScroll";
-import CustomCursor from "@/components/ui/CustomCursor";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-display" });
 
@@ -20,9 +19,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={inter.variable}>
-      <body className={`${inter.className} antialiased cursor-none`}>
+      <body className={`${inter.className} antialiased`}>
         <SmoothScroll>
-          <CustomCursor />
           <Nav />
           {children}
           <Footer />

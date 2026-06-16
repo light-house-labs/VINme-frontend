@@ -42,19 +42,21 @@ export default function FAQ() {
   return (
     <section 
       ref={sectionRef}
-      className="section-editorial"
+      className="section-editorial !py-0 !my-0 !mb-0"
     >
       <div className="container-editorial grid-12 text-left">
-        <div className="col-span-4 md:col-span-8 lg:col-span-10 lg:col-start-2 mb-[64px]">
+        {/* Left Column: Title */}
+        <div className="col-span-4 md:col-span-8 lg:col-span-4 lg:pr-[32px] mb-12 lg:mb-0">
           <div className="label-editorial">
             FAQ
           </div>
-          <h2 className="heading-editorial">
+          <h2 className="heading-editorial !mb-0">
             Frequently asked questions.
           </h2>
         </div>
 
-        <div className="col-span-4 md:col-span-8 lg:col-span-10 lg:col-start-2 flex flex-col">
+        {/* Right Column: Accordion */}
+        <div className="col-span-4 md:col-span-8 lg:col-span-8 flex flex-col">
           {faqs.map((faq, i) => (
             <div 
               key={i} 

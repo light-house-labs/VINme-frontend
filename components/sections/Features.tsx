@@ -61,10 +61,10 @@ export default function Features() {
   return (
     <section 
       ref={sectionRef}
-      className="section-editorial"
+      className="section-editorial !mb-0"
     >
       <div className="container-editorial text-left">
-        <div className="mb-[120px]">
+        <div className="mb-[48px] md:mb-[64px]">
           <div className="label-editorial">
             SIX REASONS
           </div>

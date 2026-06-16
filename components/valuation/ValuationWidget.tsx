@@ -933,7 +933,8 @@ export default function ValuationWidget() {
                 animate={{ scale: 1, y: 0 }}
                 exit={{ scale: 0.96, y: 15 }}
                 transition={{ type: "spring", duration: 0.5 }}
-                className="relative w-full max-w-5xl bg-void-black border border-soot p-8 md:p-12 flex flex-col gap-8 max-h-[90vh] overflow-y-auto z-10 shadow-2xl text-left"
+                data-lenis-prevent
+                className="relative w-full max-w-5xl bg-void-black border border-soot p-5 sm:p-8 md:p-12 flex flex-col gap-6 md:gap-8 max-h-[90vh] overflow-y-auto z-10 shadow-2xl text-left"
               >
               {/* Corner accents inside modal */}
               <div className="absolute top-0 left-0 w-3 h-3 border-t border-l border-signal-amber" />
@@ -944,7 +945,7 @@ export default function ValuationWidget() {
               {/* Close Button */}
               <button 
                 onClick={handleClose}
-                className="absolute top-6 right-6 p-2 text-ash hover:text-bone-white transition-colors cursor-pointer"
+                className="absolute top-4 right-4 md:top-6 md:right-6 p-2 text-ash hover:text-bone-white transition-colors cursor-pointer"
                 aria-label="Close appraisal flow"
               >
                 <X className="w-6 h-6 stroke-[1.5]" />
@@ -1103,10 +1104,9 @@ export default function ValuationWidget() {
                     className="flex flex-col gap-6 w-full"
                   >
                     {/* 1. Progress Bar (Top) */}
-                    <div className="w-full flex flex-col gap-2 font-mono text-left">
-                      <div className="flex justify-between text-[10px] text-ash tracking-wider uppercase font-[600]">
-                        <span>Appraisal Matrix Progress</span>
-                        <span>Stage {previousRounds.length + 1} of 4</span>
+                    <div className="w-full flex flex-col gap-2 font-mono text-left pt-2 md:pt-4">
+                      <div className="text-[10px] text-ash tracking-wider uppercase font-[600]">
+                        Progress
                       </div>
                       <div className="w-full h-[4px] bg-carbon overflow-hidden">
                         <motion.div 
@@ -1119,19 +1119,19 @@ export default function ValuationWidget() {
                     </div>
 
                     {/* 2. Split Columns Grid */}
-                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch mt-2">
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch mt-2">
                       {/* Left Column: Price, Confidence, Image, and Model */}
-                      <div className="col-span-12 lg:col-span-6 flex flex-col gap-5 text-left">
+                      <div className="col-span-12 lg:col-span-5 flex flex-col gap-4 sm:gap-5 text-left">
                         <div className="flex flex-col gap-1">
-                          <div className="text-[10px] font-mono font-[600] text-ash tracking-[0.15em] uppercase">Dynamic Appraisal Matrix Range</div>
-                          <div className="text-[32px] md:text-[36px] font-[800] text-bone-white tracking-tight leading-none mt-2 font-sans">
+                          <div className="text-[10px] font-mono font-[600] text-ash tracking-[0.15em] uppercase">Estimated Value</div>
+                          <div className="text-[26px] sm:text-[32px] md:text-[36px] font-[800] text-bone-white tracking-tight leading-none mt-2 font-sans">
                             ${currentValuation.priceRange.low.toLocaleString()} – ${currentValuation.priceRange.high.toLocaleString()}
                           </div>
                         </div>
 
                         <div className="flex flex-col gap-2">
                           <div className="flex justify-between items-end text-[11px] font-sans tracking-wide">
-                            <span className="text-ash tracking-[0.1em] uppercase">Appraisal Accuracy Index</span>
+                            <span className="text-ash tracking-[0.1em] uppercase">Appraisal Confidence</span>
                             <span className="font-[700] text-bone-white">{currentValuation.confidence}%</span>
                           </div>
                           {/* Clean Confidence Bar */}
@@ -1144,11 +1144,11 @@ export default function ValuationWidget() {
                         </div>
 
                         {/* White Background Car Image Container with Skeleton */}
-                        <div className="relative w-full h-[260px] md:h-[300px] bg-white border border-soot/10 flex items-center justify-center overflow-hidden p-6">
+                        <div className="relative w-full h-[150px] sm:h-[180px] md:h-[220px] bg-white flex items-center justify-center overflow-hidden p-4">
                           {imgLoading && (
                             <div className="absolute inset-0 flex flex-col items-center justify-center bg-ash/10 animate-pulse">
-                              <div className="w-2/3 h-[70px] bg-ash/20 rounded-none" />
-                              <span className="text-[10px] font-mono text-ash mt-3 uppercase tracking-widest">Loading model profile...</span>
+                              <div className="w-2/3 h-[50px] bg-ash/20 rounded-none" />
+                              <span className="text-[10px] font-mono text-ash mt-2 uppercase tracking-widest">Loading model profile...</span>
                             </div>
                           )}
                           <img
@@ -1163,11 +1163,11 @@ export default function ValuationWidget() {
                               setImgError(true);
                               setImgLoading(false);
                             }}
-                            className={`w-full max-w-[480px] h-auto object-contain max-h-[260px] mx-auto transition-all duration-500 hover:scale-[1.03] ${imgLoading ? 'opacity-0' : 'opacity-100'}`}
+                            className={`w-full max-w-[280px] sm:max-w-[340px] md:max-w-[400px] h-auto object-contain max-h-[130px] sm:max-h-[150px] md:max-h-[180px] mx-auto transition-all duration-500 hover:scale-[1.02] ${imgLoading ? 'opacity-0' : 'opacity-100'}`}
                           />
                         </div>
 
-                        <div className="text-left font-mono text-[12px] border-t border-soot/40 pt-4 mt-2">
+                        <div className="text-left font-mono text-[12px] pt-2 mt-2">
                           <div className="text-bone-white font-[700] uppercase text-[14px]">
                             {decodedVehicle.year} {decodedVehicle.make} {decodedVehicle.model} {decodedVehicle.trim ? ` ${decodedVehicle.trim}` : ''}
                           </div>
@@ -1175,11 +1175,8 @@ export default function ValuationWidget() {
                       </div>
 
                       {/* Right Column: Question & Option Chips */}
-                      <div className="col-span-12 lg:col-span-6 flex flex-col justify-between text-left lg:pl-10 lg:border-l lg:border-soot/20">
+                      <div className="col-span-12 lg:col-span-7 flex flex-col justify-between text-left lg:pl-10">
                         <div>
-                          <div className="text-[11px] font-mono font-[600] text-signal-amber tracking-[0.2em] uppercase mb-3">
-                            DECISION BLOCK PARAMETER ({previousRounds.length + 1})
-                          </div>
                           <h4 className="text-[20px] md:text-[22px] font-[600] text-bone-white leading-snug tracking-tight mb-1">
                             {currentValuation.nextQuestion}
                           </h4>
@@ -1188,7 +1185,7 @@ export default function ValuationWidget() {
                           {renderCategoryOptions()}
                         </div>
 
-                        <div className="flex justify-between items-center border-t border-soot pt-6 mt-8 font-mono text-[12px]">
+                        <div className="flex justify-between items-center pt-6 mt-8 font-mono text-[12px]">
                           <span className="text-ash uppercase">
                             Step {previousRounds.length + 1} of 4
                           </span>
@@ -1211,13 +1208,13 @@ export default function ValuationWidget() {
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0 }}
-                    className="flex flex-col gap-8"
+                    className="flex flex-col gap-6 md:gap-8"
                   >
-                    <div className="border-b border-soot pb-8 flex flex-col gap-5 text-center">
+                    <div className="border-b border-soot pb-6 md:pb-8 flex flex-col gap-4 md:gap-5 text-center">
                       {currentValuation.confidence >= 65 ? (
                         <>
                           <div className="text-[11px] font-mono font-[600] text-ash tracking-[0.25em] uppercase">FINAL APPRAISAL RESULT</div>
-                          <div className="text-[56px] font-[800] text-[#e8a020] tracking-tight leading-none my-3 font-sans">
+                          <div className="text-[32px] sm:text-[42px] md:text-[56px] font-[800] text-[#e8a020] tracking-tight leading-none my-3 font-sans">
                             ${currentValuation.priceRange.low.toLocaleString()} – ${currentValuation.priceRange.high.toLocaleString()}
                           </div>
                           
@@ -1235,7 +1232,7 @@ export default function ValuationWidget() {
                           </div>
 
                           {/* White Background Car Image Card */}
-                          <div className="w-full py-8 flex items-center justify-center bg-white border border-soot/10 overflow-hidden p-6">
+                          <div className="w-full py-4 sm:py-5 flex items-center justify-center bg-white overflow-hidden p-4">
                             <img
                               key={`${decodedVehicle.make}-${decodedVehicle.model}`}
                               src={imgError 
@@ -1244,7 +1241,7 @@ export default function ValuationWidget() {
                               }
                               alt={`${decodedVehicle.year} ${decodedVehicle.make} ${decodedVehicle.model}`}
                               onError={() => setImgError(true)}
-                              className="w-full max-w-[560px] h-auto object-contain max-h-[300px] mx-auto transition-all duration-500 hover:scale-[1.03]"
+                              className="w-full max-w-[300px] sm:max-w-[440px] h-auto object-contain max-h-[150px] sm:max-h-[220px] mx-auto transition-all duration-500 hover:scale-[1.02]"
                             />
                           </div>
 
@@ -1339,7 +1336,7 @@ export default function ValuationWidget() {
                     initial={{ opacity: 0, scale: 0.98 }}
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0 }}
-                    className="flex flex-col items-center justify-center py-16 text-center gap-8"
+                    className="flex flex-col items-center justify-center py-8 sm:py-16 text-center gap-6 sm:gap-8"
                   >
                     <div className="w-16 h-16 rounded-full border border-signal-amber flex items-center justify-center text-signal-amber mb-2">
                       <CheckCircle2 className="w-8 h-8 stroke-[1.5]" />

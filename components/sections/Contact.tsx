@@ -68,34 +68,34 @@ export default function Contact() {
           </div>
         </div>
 
-        <div className="col-span-4 md:col-span-8 lg:col-span-7 bg-carbon border border-soot p-[32px] md:p-[64px] mt-16 lg:mt-0">
-          <form onSubmit={handleSubmit} className="flex flex-col gap-[48px] text-left">
-            <div className="flex flex-col md:flex-row gap-[48px]">
-              <div className="flex flex-col gap-[16px] flex-1">
+        <div className="col-span-4 md:col-span-8 lg:col-span-6 lg:col-start-7 bg-carbon border border-soot p-[24px] md:p-[40px] mt-16 lg:mt-0">
+          <form onSubmit={handleSubmit} className="flex flex-col gap-[32px] md:gap-[40px] text-left">
+            <div className="flex flex-col md:flex-row gap-[24px] md:gap-[32px]">
+              <div className="flex flex-col gap-[8px] md:gap-[12px] flex-1">
                 <label className="text-[13px] font-[600] text-ash tracking-[0.1em] uppercase">Name</label>
-                <input required type="text" className="bg-transparent border-b border-soot text-bone-white px-0 py-[16px] focus:outline-none focus:border-signal-amber font-[400] text-[20px] transition-colors rounded-none placeholder:text-ash/30" placeholder="Jane Doe" />
+                <input required type="text" className="bg-transparent border-b border-soot text-bone-white px-0 py-[10px] md:py-[12px] focus:outline-none focus:border-signal-amber font-[400] text-[16px] md:text-[18px] transition-colors rounded-none placeholder:text-ash/30" placeholder="Jane Doe" />
               </div>
 
-              <div className="flex flex-col gap-[16px] flex-1">
+              <div className="flex flex-col gap-[8px] md:gap-[12px] flex-1">
                 <label className="text-[13px] font-[600] text-ash tracking-[0.1em] uppercase">Phone</label>
-                <input required type="tel" className="bg-transparent border-b border-soot text-bone-white px-0 py-[16px] focus:outline-none focus:border-signal-amber font-[400] text-[20px] transition-colors rounded-none placeholder:text-ash/30" placeholder="(555) 123-4567" />
+                <input required type="tel" className="bg-transparent border-b border-soot text-bone-white px-0 py-[10px] md:py-[12px] focus:outline-none focus:border-signal-amber font-[400] text-[16px] md:text-[18px] transition-colors rounded-none placeholder:text-ash/30" placeholder="(555) 123-4567" />
               </div>
             </div>
 
-            <div className="flex flex-col gap-[16px]">
+            <div className="flex flex-col gap-[8px] md:gap-[12px]">
               <label className="text-[13px] font-[600] text-ash tracking-[0.1em] uppercase">Email</label>
-              <input required type="email" className="bg-transparent border-b border-soot text-bone-white px-0 py-[16px] focus:outline-none focus:border-signal-amber font-[400] text-[20px] transition-colors rounded-none placeholder:text-ash/30" placeholder="jane@example.com" />
+              <input required type="email" className="bg-transparent border-b border-soot text-bone-white px-0 py-[10px] md:py-[12px] focus:outline-none focus:border-signal-amber font-[400] text-[16px] md:text-[18px] transition-colors rounded-none placeholder:text-ash/30" placeholder="jane@example.com" />
             </div>
 
-            <div className="flex flex-col gap-[16px]">
+            <div className="flex flex-col gap-[8px] md:gap-[12px]">
               <label className="text-[13px] font-[600] text-ash tracking-[0.1em] uppercase">Message</label>
-              <textarea required rows={1} className="bg-transparent border-b border-soot text-bone-white px-0 py-[16px] focus:outline-none focus:border-signal-amber font-[400] text-[20px] transition-colors resize-none rounded-none placeholder:text-ash/30" placeholder="How can we help?" />
+              <textarea required rows={2} className="bg-transparent border-b border-soot text-bone-white px-0 py-[10px] md:py-[12px] focus:outline-none focus:border-signal-amber font-[400] text-[16px] md:text-[18px] transition-colors resize-none rounded-none placeholder:text-ash/30" placeholder="How can we help?" />
             </div>
 
             <button
               type="submit"
               disabled={status !== "idle"}
-              className={`btn-editorial group relative mt-[32px] w-full flex items-center justify-center gap-[12px] !py-[24px] !px-8 overflow-hidden ${
+              className={`btn-editorial group relative mt-[16px] w-full flex items-center justify-center gap-[12px] !py-[16px] !px-6 overflow-hidden ${
                 status === "success" 
                   ? "opacity-50 cursor-not-allowed" 
                   : ""

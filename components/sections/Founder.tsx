@@ -8,8 +8,15 @@ import { motion } from "framer-motion";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import SplitType from "split-type";
+import { Pinyon_Script } from "next/font/google";
 
 gsap.registerPlugin(ScrollTrigger);
+
+const pinyonScript = Pinyon_Script({
+  weight: "400",
+  subsets: ["latin"],
+  display: "swap",
+});
 
 export default function Founder() {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -80,6 +87,25 @@ export default function Founder() {
         }
       }
     );
+    // Parallax scroll choreography for proof images
+    if (carouselRef.current) {
+      const parallaxImages = carouselRef.current.querySelectorAll(".parallax-image");
+      parallaxImages.forEach((img) => {
+        gsap.fromTo(img,
+          { yPercent: -8 },
+          {
+            yPercent: 8,
+            ease: "none",
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: "top bottom",
+              end: "bottom top",
+              scrub: true
+            }
+          }
+        );
+      });
+    }
 
   }, []);
 
@@ -125,7 +151,7 @@ export default function Founder() {
           </p>
           
           <div className="mb-[48px] reveal-element">
-            <span className="font-['Brush_Script_MT',cursive] text-[48px] text-bone-white opacity-85 italic">
+            <span className={`${pinyonScript.className} text-[64px] text-signal-amber opacity-90 select-none block leading-none`}>
               Ori Filhart
             </span>
           </div>
@@ -256,14 +282,16 @@ export default function Founder() {
                 className="w-[280px] sm:w-[360px] shrink-0 snap-start group"
               >
                 <div className="relative h-[380px] sm:h-[480px] w-full overflow-hidden border border-soot/80 bg-carbon">
-                  <Image
-                    src={image.src}
-                    alt={image.alt}
-                    fill
-                    sizes="(max-width: 640px) 280px, 360px"
-                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-void-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-350 flex items-end p-6" />
+                  <div className="absolute inset-0 h-[116%] -top-[8%] w-full">
+                    <Image
+                      src={image.src}
+                      alt={image.alt}
+                      fill
+                      sizes="(max-width: 640px) 280px, 360px"
+                      className="object-cover parallax-image rounded-none transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                    />
+                  </div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-void-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-350 flex items-end p-6 z-10" />
                 </div>
               </motion.div>
             ))}
